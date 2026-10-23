@@ -1,0 +1,98 @@
+{
+  "name": "vuldee",
+  "displayName": "VulDee Vulnerability Detector",
+  "description": "Deep-learning based fine-grained vulnerability detection and localization for C/C++.",
+  "version": "0.1.0",
+  "publisher": "vuldee",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp",
+    "onCommand:vuldee.scanFile",
+    "onCommand:vuldee.trainModel",
+    "onCommand:vuldee.demo",
+    "onCommand:vuldee.openPanel"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vuldee.scanFile",
+        "title": "VulDee: Scan current file"
+      },
+      {
+        "command": "vuldee.trainModel",
+        "title": "VulDee: Train model on corpus"
+      },
+      {
+        "command": "vuldee.demo",
+        "title": "VulDee: Generate demo data and train a quick model"
+      },
+      {
+        "command": "vuldee.openPanel",
+        "title": "VulDee: Open training & settings panel"
+      }
+    ],
+    "configuration": {
+      "title": "VulDee",
+      "properties": {
+        "vuldee.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Python interpreter that has the `vuldee` package installed. Leave empty to use `python` from PATH."
+        },
+        "vuldee.modelDir": {
+          "type": "string",
+          "default": "",
+          "description": "Directory containing locator.pt, word2vec.model and config.json."
+        },
+        "vuldee.corpusPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to a corpus pkl file for training."
+        },
+        "vuldee.w2vPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to a trained word2vec model for training."
+        },
+        "vuldee.epochs": {
+          "type": "number",
+          "default": 4,
+          "description": "Number of training epochs."
+        },
+        "vuldee.maxlen": {
+          "type": "number",
+          "default": 900,
+          "description": "Maximum number of tokens per candidate slice."
+        },
+        "vuldee.vectorDim": {
+          "type": "number",
+          "default": 30,
+          "description": "Word embedding dimension."
+        },
+        "vuldee.scanOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically scan a C/C++ file when it is saved."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}

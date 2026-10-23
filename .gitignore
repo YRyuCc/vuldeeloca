@@ -1,0 +1,6 @@
+node_modules/
+out/
+*.vsix
+backend/vuldee.egg-info/
+__pycache__/
+.pytest_cache/
